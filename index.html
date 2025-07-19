@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrendPulse | Responsive Edition</title>
+    <title>TrendPulse | Deep Purple Edition</title>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -11,13 +11,16 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         :root {
-            --bg-color: #0b111e;
-            --surface-color: #121a2c;
-            --primary-color: #00bcd4; /* Cyan */
-            --primary-light: #4dd0e1;
+            /* --- NEW #A100FF & #0F1021 COLOR SCHEME --- */
+            --bg-color: #0F1021;          /* Deep Navy/Purple Background */
+            --surface-color: #191a2e;      /* Slightly lighter surface */
+            --primary-color: #A100FF;      /* Main Electric Purple */
+            --primary-light: #b540ff;      /* Lighter version for hover */
+            --accent-color: var(--primary-color); /* Using primary as main accent */
+            --accent-light: var(--primary-light); 
             --text-color: #e3e8f0;
-            --text-muted-color: #7b8a9e;
-            --border-color: #253147;
+            --text-muted-color: #8a8da0;
+            --border-color: #2d2e49;
             --header-height: 65px;
         }
 
@@ -40,16 +43,16 @@
         .nav-links a { color: var(--text-muted-color); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
         .nav-links a:hover { color: var(--primary-color); }
         .nav-actions { position: relative; }
-        .hamburger-menu { display: none; } /* Hidden on desktop */
+        .hamburger-menu { display: none; }
         
         /* --- Buttons --- */
         .btn { padding: 0.6rem 1.2rem; border: 1px solid transparent; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
-        .btn-primary { background-color: var(--primary-color); color: var(--bg-color); }
+        .btn-primary { background-color: var(--primary-color); color: white; }
         .btn-primary:hover { background-color: var(--primary-light); }
         .btn-secondary { background: var(--surface-color); color: var(--text-muted-color); border: 1px solid var(--border-color); }
         .btn-secondary:hover { background: var(--border-color); color: var(--text-color); }
         .btn-outline { background: transparent; color: var(--primary-light); border: 1px solid var(--primary-light); font-size: 0.8rem; padding: 0.3rem 0.8rem; }
-        .btn-outline:hover { background: var(--primary-light); color: var(--bg-color); }
+        .btn-outline:hover { background: var(--primary-light); color: white; }
 
         /* --- Main Content & Forms --- */
         .main-container { display: grid; grid-template-columns: 350px 1fr; gap: 2rem; padding: 2rem; max-width: 1400px; margin: auto; }
@@ -62,9 +65,9 @@
         .trending-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
         .trending-title-group { display: flex; align-items: center; gap: 0.75rem; font-size: 1.5rem; font-weight: 600; }
         .filter-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
-        .filter-btn { background-color: #253147; color: var(--text-muted-color); border: 1px solid transparent; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; }
-        .filter-btn:hover { background-color: #35435e; color: var(--text-color); }
-        .filter-btn.active { background-color: var(--primary-color); color: var(--bg-color); font-weight: 500; }
+        .filter-btn { background-color: var(--surface-color); border: 1px solid var(--border-color); color: var(--text-muted-color); padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; }
+        .filter-btn:hover { background-color: var(--border-color); color: var(--text-color); }
+        .filter-btn.active { background-color: var(--primary-color); color: white; font-weight: 500; border-color: var(--primary-color); }
 
         /* --- Trend Card --- */
         .trend-card { background-color: var(--bg-color); padding: 1.5rem; border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 1rem; }
@@ -76,13 +79,13 @@
         .trend-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
         .trend-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .tag { padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; font-weight: 500; }
-        .tag.category { background-color: var(--primary-color); color: var(--bg-color); }
-        .tag.hashtag { background-color: #253147; color: var(--text-muted-color); cursor: pointer; transition: background-color 0.3s; }
-        .tag.hashtag:hover { background-color: #35435e; color: var(--text-color); }
+        .tag.category { background-color: var(--accent-color); color: white; }
+        .tag.hashtag { background-color: var(--surface-color); border: 1px solid var(--border-color); color: var(--text-muted-color); cursor: pointer; transition: all 0.3s; }
+        .tag.hashtag:hover { background-color: var(--border-color); color: var(--text-color); }
         .trend-actions { display: flex; align-items: center; gap: 1rem; }
-        .btn-vote { background-color: #253147; color: var(--text-muted-color); border: 1px solid var(--border-color); display: flex; align-items: center; gap: 0.5rem; }
-        .btn-vote:hover { background-color: #35435e; color: var(--text-color); }
-        .btn-vote.voted { background-color: var(--primary-color); color: var(--bg-color); border-color: var(--primary-light); }
+        .btn-vote { background-color: var(--surface-color); border: 1px solid var(--border-color); color: var(--text-muted-color); display: flex; align-items: center; gap: 0.5rem; }
+        .btn-vote:hover { background-color: var(--border-color); color: var(--text-color); }
+        .btn-vote.voted { background-color: var(--accent-color); color: white; border-color: var(--accent-light); }
         #trends-footer { text-align: center; margin-top: 1.5rem; }
 
         /* --- VIEW-SPECIFIC STYLING --- */
@@ -94,16 +97,15 @@
         /* --- Dropdown & Modal System --- */
         .dropdown { display: none; position: absolute; top: 110%; right: 0; background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; min-width: 200px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); overflow: hidden; }
         .dropdown.show { display: block; }
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(11, 17, 30, 0.85); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
+        .dropdown-item:hover { background-color: var(--border-color); }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 16, 33, 0.85); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
         .modal-overlay.show { display: flex; }
         .modal-content { background-color: var(--surface-color); padding: 2rem; border-radius: 12px; width: 90%; max-width: 500px; text-align: center; position: relative; border: 1px solid var(--border-color); }
         .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-muted-color); font-size: 1.5rem; cursor: pointer; }
         .modal-title { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-light); }
         
         /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 1024px) {
-            .main-container { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 1024px) { .main-container { grid-template-columns: 1fr; } }
         @media (max-width: 768px) {
             .header { padding: 0 1rem; }
             .nav-links { position: fixed; top: var(--header-height); left: 0; width: 100%; height: calc(100vh - var(--header-height)); background-color: var(--bg-color); flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 2rem; gap: 2rem; transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
@@ -357,16 +359,22 @@
                     datasets: [{
                         label: 'Votes',
                         data: sortedTrends.map(t=>t.votes),
-                        backgroundColor: 'rgba(0, 188, 212, 0.6)',
-                        borderColor: 'rgba(0, 188, 212, 1)',
+                        backgroundColor: 'rgba(161, 0, 255, 0.6)', // Corresponds to #A100FF
+                        borderColor: 'rgba(161, 0, 255, 1)',   // Corresponds to #A100FF
                         borderWidth: 1
                     }]
                 },
                 options: {
                     indexAxis: 'y',
                     responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: { x: { grid: { color: 'rgba(37, 49, 71, 0.5)' }, ticks: { color: '#7b8a9e' } }, y: { grid: { display: false }, ticks: { color: '#e3e8f0' } } }
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: { borderColor: '#A100FF' }
+                    },
+                    scales: { 
+                        x: { grid: { color: 'rgba(45, 46, 73, 0.5)' }, ticks: { color: '#8a8da0' } }, 
+                        y: { grid: { display: false }, ticks: { color: '#e3e8f0' } } 
+                    }
                 }
             });
         };
@@ -430,7 +438,12 @@
         DOM.loadMoreBtn.addEventListener('click', () => {
             let filteredTrends = allTrends.filter(t => (currentFilter.type === 'category' && (currentFilter.value === 'All' || t.category === currentFilter.value)) || (currentFilter.type === 'tag' && t.tags.includes(currentFilter.value)));
             const nextTrends = filteredTrends.slice(displayedTrendsCount, displayedTrendsCount + TRENDS_PER_PAGE);
-            nextTrends.forEach(trend => DOM.trendsList.appendChild(createTrendCard(trend)));
+            nextTrends.forEach(trend => {
+                const trendCard = createTrendCard(trend);
+                if (trendCard) {
+                    DOM.trendsList.appendChild(trendCard);
+                }
+            });
             displayedTrendsCount += nextTrends.length;
             DOM.loadMoreBtn.classList.toggle('hidden', displayedTrendsCount >= filteredTrends.length);
         });
