@@ -369,6 +369,9 @@
         DOM.filterButtonsContainer.addEventListener('click', (e) => { if (e.target.classList.contains('filter-btn')) { currentFilter = { type: 'category', value: e.target.dataset.filter }; updateUIForFilter(); } });
         DOM.clearFilterBtn.addEventListener('click', () => { currentFilter = { type: 'category', value: 'All' }; updateUIForFilter(); });
         document.addEventListener('click', (e) => { if(DOM.userMenu && !DOM.userMenu.contains(e.target)) { DOM.userDropdown.classList.remove('show'); }});
+
+        const API_KEY = "AIzaSyDQ_TeD1QcZO3PRMd6Z2ifQZUgsgx_1Pdc"; // Your API Key as requested
+        const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
         
         // --- INITIALIZATION ---
         populateCategoryFilters();
@@ -377,3 +380,4 @@
     </script>
 </body>
 </html>
+
